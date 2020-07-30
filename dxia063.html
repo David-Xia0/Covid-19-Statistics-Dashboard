@@ -3,35 +3,74 @@
 
 <head>
     <title>COMPSCI 335 Assignment 1!</title>
+    <link rel="shortcut icon" href="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" type="image/x-icon"/>
 
     <script>
         const selectTab = (elementID) => {
-            document.getElementById(elementID).style.backgroundColor = "blue"
+            for (element of document.getElementsByClassName('tab')) {
+                element.style.backgroundColor = "transparent";
+            }
+
+            for (element of document.getElementsByClassName('content')) {
+                element.style.display = "none";
+            }
+            document.getElementById(elementID+"content").style.display = "block";
+            document.getElementById(elementID).style.backgroundColor = "blue";
 
         }
 
     </script>
-
-
-
 </head>
 
 <body>
-
     <div>
-
         <img src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" style=" width: 192px; height: 192px;">
-        <p style="display: inline;">home</p>
-        <p style="display: inline;">shop</p>
-        <p id="news" style="display: inline;" onclick="selectTab('news');">news</p>
-
+        <table style="display: inline; align-self: center; align-content: center; text-align: center;">
+            <tr style="cursor: pointer;">
+                <td>
+                    <img id="home" class="tab" style="display: inline;" onclick="selectTab('home');" src="" alt="home">
+                </td>
+                <td>
+                    <img id="products" class="tab" style="display: inline;" onclick="selectTab('products');" src="" alt="products">
+                </td>
+                <td>
+                    <img id="news" class="tab" style="display: inline;" onclick="selectTab('news');" src="" alt="news">
+                </td>
+                <td>
+                    <img id="location" class="tab" style="display: inline;" onclick="selectTab('location');" src="" alt="location">
+                </td>
+                <td>
+                    <img id="guestbook" class="tab" style="display: inline;" onclick="selectTab('guestbook');" src="" alt="guestbook">
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div>
-
         <h1>Dunedin Dairy </h1>
-
     </div>
+
+    <div id="homecontent" class="content">
+        <p> This shop is dairy cool !! </p>
+    </div>
+
+    <div id="productscontent" class="content">
+        <p> These products are bery cool !! </p>
+    </div>
+
+    <div id="newscontent" class="content">
+        <p> This news is dairy cool !! </p>
+    </div>
+
+    <div id="locationcontent" class="content">
+        <p> This locaiton is dairy cool !! </p>
+    </div>
+
+    <div id="guestbookcontent" class="content">
+        <p> This guestbook is meh !! </p>
+    </div>
+
+
 
 
 
