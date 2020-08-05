@@ -3,7 +3,7 @@
 
 <head>
     <title>COMPSCI 335 Assignment 1!</title>
-    <link rel="shortcut icon" href="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" type="image/x-icon"/>
+    <link rel="shortcut icon" href="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" type="image/x-icon" />
     <link rel="stylesheet" href="dxia063.css">
 
     <script>
@@ -15,8 +15,8 @@
             for (element of document.getElementsByClassName('content')) {
                 element.style.display = "none";
             }
-            document.getElementById(elementID+"content").style.display = "block";
-            document.getElementById(elementID).style.backgroundColor = "blue";
+            document.getElementById(elementID + "content").style.display = "block";
+            document.getElementById(elementID).style.backgroundColor = "grey";
 
         }
 
@@ -24,55 +24,52 @@
 </head>
 
 <body>
-    <div>
+    <div style="display: flex;">
         <img src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" style=" width: 192px; height: 192px;">
-        <table style="width: 70%;">
+        <table style=" height: 192px; width: 100%;">
             <tr style="cursor: pointer;">
-                <td>
-                    <img id="home" class="tab" style="display: inline;" onclick="selectTab('home');" src="" alt="home">
+                <td id="DDhome" class="tab" onclick="selectTab('DDhome');">
+                    🏠
                 </td>
-                <td>
-                    <img id="products" class="tab" style="display: inline;" onclick="selectTab('products');" src="" alt="products">
+                <td id="DDproducts" class="tab" onclick="selectTab('DDproducts');">
+                    🛒
                 </td>
-                <td>
-                    <img id="news" class="tab" style="display: inline;" onclick="selectTab('news');" src="" alt="news">
+                <td id="DDnews" class="tab" onclick="selectTab('DDnews');">
+                    📌
                 </td>
-                <td>
-                    <img id="location" class="tab" style="display: inline;" onclick="selectTab('location');" src="" alt="location">
+                <td id="DDlocation" class="tab" onclick="selectTab('DDlocation');">
+                    📰
                 </td>
-                <td>
-                    <img id="guestbook" class="tab" style="display: inline;" onclick="selectTab('guestbook');" src="" alt="guestbook">
+                <td id="DDguestbook" class="tab" onclick="selectTab('DDguestbook');">
+                    📖
                 </td>
             </tr>
         </table>
     </div>
-
+    <hr>
     <div>
         <h1>Dunedin Dairy </h1>
     </div>
 
-    <div id="homecontent" class="content" style="display: block;">
+    <div id="DDhomecontent" class="content" style="display: block;">
         <p> This shop is dairy cool !! </p>
     </div>
 
-    <div id="productscontent" class="content">
+    <div id="DDproductscontent" class="content">
         <p> These products are bery cool !! </p>
     </div>
 
-    <div id="newscontent" class="content">
+    <div id="DDnewscontent" class="content">
         <p> This news is dairy cool !! </p>
     </div>
 
-    <div id="locationcontent" class="content">
-        <p> This locaiton is dairy cool !! </p>
+    <div id="DDlocationcontent" class="content" style=" text-align:  center;"> 
+        <img class="mapImage" src="http://redsox.uoa.auckland.ac.nz/ds/map.png">
     </div>
 
-    <div id="guestbookcontent" class="content">
+    <div id="DDguestbookcontent" class="content">
         <p> This guestbook is meh !! </p>
     </div>
-
-
-
 
 
 </body>

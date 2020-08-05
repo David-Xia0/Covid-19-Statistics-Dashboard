@@ -1,3 +1,14 @@
 .content{
     display: none;
+    width:  100%;
+}
+
+.tab{
+    text-align: center;
+    font-size: 50px;
+    width: 20%;
+}
+
+.mapImage{
+    width: 100%;
 }
