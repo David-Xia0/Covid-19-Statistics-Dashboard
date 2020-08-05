@@ -20,7 +20,21 @@
         }
 
 
-        
+        const getAddress = () => {
+            const fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/vcard");
+
+            const streamPromise = fetchPromise.then((response) => response.text());
+            streamPromise.then((data) => {
+                let array = data.split("\n");
+
+                document.getElementById("vcard").innerHTML = "<p> tel: " + array[3].substring(14)
+                    + "</p><p> addr: " + array[4].substring(16).split(";").join(",")
+                    + "</p><p> email: " + array[5].substring(6);
+
+            });
+
+        }
+        getAddress();
 
         const getNews = () => {
             const fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/news",
@@ -37,7 +51,7 @@
                 let newsContents = "";
 
                 data.forEach((news) => {
-                    newsContents += "<img class=\"productImg\" src=\"" +news.enclosureField.urlField + "\"> <p>" + news.titleField + "</p><p>" + news.descriptionField + "</p><p>" + news.pubDateField + "</p><hr>"
+                    newsContents += "<img class=\"productImg\" src=\"" + news.enclosureField.urlField + "\"> <p>" + news.titleField + "</p><p>" + news.descriptionField + "</p><p>" + news.pubDateField + "</p><hr>"
                 })
                 document.getElementById("DDnewscontent").innerHTML = newsContents;
             });
@@ -46,8 +60,8 @@
         const getProducts = (searchKey) => {
             var fetchPromise;
             if (searchKey) {
-                fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/search?term={"
-                    + document.getElementById("DDproductsearch").value + "}",
+                fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/search?term="
+                    + document.getElementById("DDproductsearch").value,
                     {
                         headers: {
                             "Accept": "application/json",
@@ -69,7 +83,7 @@
                 let itemContents = "";
 
                 data.forEach((item) => {
-                    itemContents += "<img class=\"productImg\"src=\"http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id={" + item.ItemId + "}\"> <p>" + item.Title + "</p> <p>" + item.Price + "</p><p>" + item.Origin + "</p><hr>"
+                    itemContents += "<img class=\"productImg\"src=\"http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + item.ItemId + "\"> <p>" + item.Title + "</p> <p>" + item.Price + "</p><p>" + item.Origin + "</p><hr>"
                 })
                 document.getElementById("DDproductscontentarea").innerHTML = itemContents;
             });
@@ -116,7 +130,7 @@
     </div>
 
     <div id="DDproductscontent" class="content">
-        <input id="DDproductsearch" class="productSearch" type="text" placeholder="🔎" oninput="getProducts('serach')"> 
+        <input id="DDproductsearch" class="productSearch" type="text" placeholder="🔎" oninput="getProducts('serach')">
         <div id="DDproductscontentarea" style="text-align: center;">
 
         </div>
@@ -128,6 +142,9 @@
 
     <div id="DDlocationcontent" class="content" style=" text-align:  center;">
         <img class="mapImage" src="http://redsox.uoa.auckland.ac.nz/ds/map.png">
+        <div id="vcard">
+
+        </div>
     </div>
 
     <div id="DDguestbookcontent" class="content">
