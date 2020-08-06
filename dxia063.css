@@ -4,6 +4,24 @@
     text-align: center;
 }
 
+.commentbox{
+    height: 200px;
+    width: 400px;
+    margin-bottom: 20px;
+}
+
+.commentcontainer{
+    margin-bottom: 40px;
+    background-color: grey;
+    border-radius: 10px;
+    text-align: center;
+    width: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .tab{
     text-align: center;
     font-size: 50px;

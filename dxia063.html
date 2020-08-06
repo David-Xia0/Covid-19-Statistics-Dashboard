@@ -4,95 +4,11 @@
     <title>COMPSCI 335 Assignment 1!</title>
     <link rel="shortcut icon" href="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" type="image/x-icon" />
     <link rel="stylesheet" href="dxia063.css">
-
+    <script type="text/javascript" src="dxia063.js"></script>
     <script>
-        const selectTab = (elementID) => {
-            for (element of document.getElementsByClassName('tab')) {
-                element.style.backgroundColor = "transparent";
-            }
-
-            for (element of document.getElementsByClassName('content')) {
-                element.style.display = "none";
-            }
-            document.getElementById(elementID + "content").style.display = "block";
-            document.getElementById(elementID).style.backgroundColor = "grey";
-
-        }
-
-
-        const getAddress = () => {
-            const fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/vcard");
-
-            const streamPromise = fetchPromise.then((response) => response.text());
-            streamPromise.then((data) => {
-                let array = data.split("\n");
-
-                document.getElementById("vcard").innerHTML = "<p> tel: " + array[3].substring(14)
-                    + "</p><p> addr: " + array[4].substring(16).split(";").join(",")
-                    + "</p><p> email: " + array[5].substring(6);
-
-            });
-
-        }
-        getAddress();
-
-        const getNews = () => {
-            const fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/news",
-                {
-                    headers: {
-                        "Accept": "application/json",
-                    },
-                }
-            );
-
-
-            const streamPromise = fetchPromise.then((response) => response.json());
-            streamPromise.then((data) => {
-                let newsContents = "";
-
-                data.forEach((news) => {
-                    newsContents += "<img class=\"productImg\" src=\"" + news.enclosureField.urlField + "\"> <p>" + news.titleField + "</p><p>" + news.descriptionField + "</p><p>" + news.pubDateField + "</p><hr>"
-                })
-                document.getElementById("DDnewscontent").innerHTML = newsContents;
-            });
-        }
-
-        const getProducts = (searchKey) => {
-            var fetchPromise;
-            if (searchKey) {
-                fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/search?term="
-                    + document.getElementById("DDproductsearch").value,
-                    {
-                        headers: {
-                            "Accept": "application/json",
-                        },
-                    }
-                );
-            } else {
-                fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items",
-                    {
-                        headers: {
-                            "Accept": "application/json",
-                        },
-                    }
-                );
-            }
-
-            const streamPromise = fetchPromise.then((response) => response.json());
-            streamPromise.then((data) => {
-                let itemContents = "";
-
-                data.forEach((item) => {
-                    itemContents += "<img class=\"productImg\"src=\"http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + item.ItemId + "\"> <p>" + item.Title + "</p> <p>" + item.Price + "</p><p>" + item.Origin + "</p><hr>"
-                })
-                document.getElementById("DDproductscontentarea").innerHTML = itemContents;
-            });
-
-        }
         getProducts();
         getNews();
-
-
+        getComments();
     </script>
 </head>
 
@@ -147,8 +63,17 @@
         </div>
     </div>
 
-    <div id="DDguestbookcontent" class="content">
-        <p> This guestbook is meh !! </p>
+    <div id="DDguestbookcontent" class="content" style="text-align: left; margin-left: 30px;">
+        <div class="commentcontainer">
+            <textarea id="commenttextarea"class="commentbox"></textarea>
+            <br>
+            <label> Your name:</label> <input id="commentname" type="text" placeholder="Enter your name here">
+            <button onclick="addComments()">Send</button>
+        </div>
+        <h1>Recent Entries</h1>
+        <div id="guestbook">
+
+        </div>
     </div>
 
 
