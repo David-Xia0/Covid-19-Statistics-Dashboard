@@ -18,10 +18,24 @@ const getAddress = () => {
     const streamPromise = fetchPromise.then((response) => response.text());
     streamPromise.then((data) => {
         let array = data.split("\n");
+        let tel;
+        let email;
+        let addr;
 
-        document.getElementById("vcard").innerHTML = "<a href=\"tel:" + array[3].substring(15) + "\">phone: " + array[3].substring(14)
-            + "</a><p> address: " + array[4].substring(16).split(";").join(",")
-            + "</p><a href=\"mailto:" + array[5].substring(6) + "\"> email: " + array[5].substring(6)
+        array.forEach(element => {
+            if (element.substring(0, 3) == "TEL") {
+                tel = element.split(":")[1];
+            } else if (element.substring(0, 3) == "ADR") {
+                addr = element.split(":")[1];
+            } else if (element.substring(0, 5) == "EMAIL") {
+                email = element.split(":")[1];
+            }
+
+        })
+
+        document.getElementById("vcard").innerHTML = "<a href=\"tel:" + tel + "\">phone: " + tel
+            + "</a><p> address: " + addr.split(";").join("")
+            + "</p><a href=\"mailto:" + email + "\"> email: " + email
             + "<br><br><a href=\"http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/vcard\"> Add to contacts</a>";
 
     });
@@ -46,7 +60,7 @@ const getNews = () => {
         data.forEach((news) => {
             newsContents += "<img class=\"productImg\" src=\"" + news.enclosureField.urlField + "\"> <p>" + news.titleField + "</p><p>" + news.descriptionField + "</p><p>" + news.pubDateField + "</p><hr>"
         })
-        document.getElementById("DDnewscontent").innerHTML = newsContents;
+        document.getElementById("newscontentarea").innerHTML = newsContents;
     });
 }
 
@@ -94,14 +108,22 @@ const getComments = () => {
 }
 
 const addComments = () => {
-    const fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/comment?name=" + document.getElementById("commentname").value ,{
-        method: "post",
+    const fetchPromise = fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/comment?name=" + document.getElementById("commentname").value, {
+
+        headers: {
+            "Content-Type": "application/json",
+        },
+
+        method: "POST",
         body: JSON.stringify(document.getElementById("commenttextarea").value)
+
     });
 
 
     const streamPromise = fetchPromise.then((response) => response.text());
     streamPromise.then((data) => {
-        console.log(data);
+        getComments();
+        document.getElementById("commentname").value = "";
+        document.getElementById("commenttextarea").value = "";
     });
 }

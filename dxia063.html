@@ -14,23 +14,23 @@
 
 <body>
     <div style="display: flex;">
-        <img src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" style=" width: 192px; height: 192px;">
-        <table style=" height: 192px; width: 100%;">
+        <img src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" style=" height: 10%; width: 10%">
+        <table style=" height: 20%; width: 80%;">
             <tr style="cursor: pointer;">
                 <td id="DDhome" class="tab" onclick="selectTab('DDhome');">
-                    🏠
+                    &#127968
                 </td>
                 <td id="DDproducts" class="tab" onclick="selectTab('DDproducts');">
-                    🛒
+                    &#128722
                 </td>
                 <td id="DDlocation" class="tab" onclick="selectTab('DDlocation');">
-                    📌
+                    &#128204
                 </td>
                 <td id="DDnews" class="tab" onclick="selectTab('DDnews');">
-                    📰
+                    &#128240
                 </td>
                 <td id="DDguestbook" class="tab" onclick="selectTab('DDguestbook');">
-                    📖
+                    &#128214
                 </td>
             </tr>
         </table>
@@ -42,30 +42,38 @@
 
 
     <div id="DDhomecontent" class="content" style="display: block;">
-        <p> This shop is dairy cool !! </p>
+        <p>  Welcome to the Dunedin Diary, the leading online diary shop in New Zealand. We take pride in sourcing the best dairy products from within New Zealand and abroad. Our shop is open 24/7, and we strive to deliver your pruchases promptly.</p>
+        <p> Keep in mind that our deliveries are contactless and stay safe.</p>
+        <img src="https://d1poczgreawftx.cloudfront.net/8/w23113_kiddhannah_kiddh23113holycow%282019%2901.jpg?i=90712" style="width: 60%; ">
     </div>
 
     <div id="DDproductscontent" class="content">
-        <input id="DDproductsearch" class="productSearch" type="text" placeholder="🔎" oninput="getProducts('serach')">
+        <h1>Products</h1>
+        <input id="DDproductsearch" class="productSearch" type="text" placeholder="Search" oninput="getProducts('serach')">
         <div id="DDproductscontentarea" style="text-align: center;">
 
         </div>
     </div>
 
     <div id="DDnewscontent" class="content">
+        <h1>News</h1>
+        <div id="newscontentarea">
+
+        </div>
 
     </div>
 
     <div id="DDlocationcontent" class="content" style=" text-align:  center;">
-        <img class="mapImage" src="http://redsox.uoa.auckland.ac.nz/ds/map.png">
         <div id="vcard">
 
         </div>
+        <img class="mapImage" src="http://redsox.uoa.auckland.ac.nz/ds/map.png">
+        
     </div>
 
     <div id="DDguestbookcontent" class="content" style="text-align: left; margin-left: 30px;">
         <div class="commentcontainer">
-            <textarea id="commenttextarea"class="commentbox"></textarea>
+            <textarea id="commenttextarea"class="commentbox" placeholder="Enter Your comment Here"></textarea>
             <br>
             <label> Your name:</label> <input id="commentname" type="text" placeholder="Enter your name here">
             <button onclick="addComments()">Send</button>

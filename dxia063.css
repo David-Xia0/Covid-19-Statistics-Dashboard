@@ -1,3 +1,10 @@
+
+body, html, p *{
+   font-size: 16px ;
+   color: #000000;
+
+}
+
 .content{
     display: none;
     width:  100%;
@@ -6,7 +13,7 @@
 
 .commentbox{
     height: 200px;
-    width: 400px;
+    width: 50vw;
     margin-bottom: 20px;
 }
 
@@ -15,7 +22,7 @@
     background-color: grey;
     border-radius: 10px;
     text-align: center;
-    width: fit-content;
+    width: 55vw;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
@@ -24,7 +31,7 @@
 
 .tab{
     text-align: center;
-    font-size: 50px;
+    font-size: 6vw;
     width: 20%;
 }
 
