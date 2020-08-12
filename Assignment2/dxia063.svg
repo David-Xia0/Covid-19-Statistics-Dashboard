@@ -1,24 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
 
-    <rect width="400" height="400" fill="white"/>
-    <rect x="12" y="12" width="375" height="40" fill="black"/>
+    <rect width="400" height="400" fill="transparent"/>
+    <rect x="12" y="12" width="376" height="40" fill="black"/>
+
+
+    <g clip-path="url(#cutout1)">
+        <circle cx="72" cy="200" r="120" fill="black"/>
+    </g>
+
+    <g clip-path="url(#cutout2)">
+        <circle cx="272" cy="200" r="120" fill="black"/>ss
+    </g>
     
-    <circle cx="272" cy="200" r="120" fill="black"/>
-    <rect x="150" y="80" width="70" height="240" fill="white"/>
-
-
-    <circle cx="72" cy="200" r="120" fill="black"/>
-    <rect x="-50" y="80" width="70" height="240" fill="white"/>
-   
     <rect x="12" y="80" width="60" height="240" fill="black"/>
     <rect x="212" y="80" width="60" height="240" fill="black"/>
 
     <circle cx="92" cy="220" r="40" fill="white"/>
-    <polygon points="92,120 57,201 127,201" fill="white"/>
+    <polygon points="92,120 55,205 129,204" fill="white"/>
 
     <circle cx="292" cy="220" r="40" fill="white"/>
-    <polygon points="292,120 257,201 327,201" fill="white"/>
+    <polygon points="292,120 255,205 329,204" fill="white"/>
    
-    <rect x="12" y="348" width="375" height="40" fill="black"/>
+    <rect x="12" y="348" width="376" height="40" fill="black"/>
+
+    <defs>
+    <clipPath id="cutout1">
+        <rect x="71" y="80" width="121" height="240" fill="white" stroke="black"/>
+    </clipPath>
+
+    <clipPath id="cutout2">
+        <rect x="271" y="80" width="121" height="240" fill="white" stroke="black"/>
+    </clipPath>
+    </defs>
 
 </svg>  
