@@ -1,0 +1,59 @@
+<? xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="arrayOfItemType">
+        <xs:sequence>
+            <xs:element name="Item" type="itemType" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="itemType">
+        <xs:sequence>
+            <xs:element type="xs:decimal" name="Price"/>
+            <xs:element type="xs:string" name="Title"/>
+            <xs:element type="typesType" name="Types"/>
+        </xs:sequence>
+        <xs:attribute type="xs:integer" name="id"/>
+        <xs:attribute type="countryType" name="origin" default="NZ"/>
+    </xs:complexType>
+
+    <xs:complexType name="typesType">
+        <xs:sequence>
+            <xs:element type="typeType" name="Type" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="typeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Cheese"/>
+            <xs:enumeration value="Milk"/>
+            <xs:enumeration value="Butter"/>
+            <xs:enumeration value="Cream"/>
+            <xs:enumeration value="Yogurt"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="countryType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Italy"/>
+            <xs:enumeration value="France"/>
+            <xs:enumeration value="England"/>
+            <xs:enumeration value="Spain"/>
+            <xs:enumeration value="Iceland"/>
+            <xs:enumeration value="Switzerland"/>
+            <xs:enumeration value="Sweden"/>
+            <xs:enumeration value="Portugal"/>
+            <xs:enumeration value="Netherlands"/>
+            <xs:enumeration value="Cyprus"/>
+            <xs:enumeration value="Bulgaria"/>
+            <xs:enumeration value="Denmark"/>
+            <xs:enumeration value="India"/>
+            <xs:enumeration value="Greece"/>
+            <xs:enumeration value="Hungary"/>
+            <xs:enumeration value="NZ"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="ArrayOfItem" type="arrayOfItemType"/>
+
+</xs:schema>
