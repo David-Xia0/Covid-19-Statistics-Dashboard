@@ -46,7 +46,7 @@ const getStaff = () => {
                 StaffContents += "<a href=\"https://unidirectory.auckland.ac.nz/people/vcard/" + staff.profileUrl[1] + "\"> Add to contacts</a><hr>"
             }
         
-            document.getElementById("StaffContent").innerHTML += StaffContents;z
+            document.getElementById("StaffContent").innerHTML += StaffContents;
         })
 
     });
