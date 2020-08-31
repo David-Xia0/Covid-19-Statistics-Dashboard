@@ -8,7 +8,7 @@
 
     <xs:complexType name="itemType">
         <xs:sequence>
-            <xs:element type="xs:integer" name="ItemId"/>
+            <xs:element type="xs:unsignedint" name="ItemId"/>
             <xs:element type="countryType" name="Origin"/>
             <xs:element type="xs:decimal" name="Price"/>
             <xs:element type="xs:string" name="Title"/>

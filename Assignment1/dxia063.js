@@ -30,7 +30,6 @@ const getAddress = () => {
             } else if (element.substring(0, 5) == "EMAIL") {
                 email = element.split(":")[1];
             }
-
         })
 
         document.getElementById("vcard").innerHTML = "<a href=\"tel:" + tel + "\">phone: " + tel

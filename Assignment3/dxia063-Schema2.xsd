@@ -12,7 +12,7 @@
             <xs:element type="xs:string" name="Title"/>
             <xs:element type="typesType" name="Types"/>
         </xs:sequence>
-        <xs:attribute type="xs:integer" name="id"/>
+        <xs:attribute type="xs:unsignedint" name="id" use="required"/>
         <xs:attribute type="countryType" name="origin" default="NZ"/>
     </xs:complexType>
 

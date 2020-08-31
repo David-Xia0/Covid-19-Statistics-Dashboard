@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 334">
+    <path stroke-linecap="round" d="M 33.5 200 A 1 1 0 1 1 366.5 200" stroke-width="40" stroke="black" fill="none"/>
+    <path stroke-linecap="round" d="M 55.8 283.25 A 1 1 0 1 1 344.19 116.75" stroke-width="40" stroke="black" fill="none"/>
+    <path stroke-linecap="round" d="M 55.8 116.75 A 1 1 0 1 1 344.19 283.25" stroke-width="40" stroke="black" fill="none"/>
+
+    <circle  cx="58.5" cy="58.5"  r="20" fill="black"/>
+    <circle  cx="341.5" cy="58.5"  r="20" fill="black"/>
+
+
+    <rect x="180" y="0" width="40" height="30" fill="black" transform="rotate(45,200,200)"/>
+    <rect x="180" y="0" width="40" height="30" fill="black" transform="rotate(315,200,200)"/>
+    
+    <rect x="180" y="50" width="40" height="50" fill="black"/>
+
+
+    <circle cx="200" cy="200"  r="121" fill="black" mask="url(#whiteCircle)"/>
+
+    <mask id="whiteCircle">
+        <circle  cx="200" cy="200"  r="120.5" fill="white" stroke="black"/>
+        <circle  cx="200" cy="200"  r="79.5" fill="black" stroke="black"/>
+    </mask>
+
+    <circle  cx="200" cy="200"  r="19.5" fill="black" stroke="black"/>
+    <circle  cx="205" cy="195"  r="9" fill="white" stroke="black"/>
+
+</svg>  
