@@ -1,3 +1,5 @@
+const proxy ="https://cws.auckland.ac.nz/cors/CorsProxyService.svc/proxy?url="
+
 const selectTab = (elementID) => {
     for (element of document.getElementsByClassName('tab')) {
         element.style.backgroundColor = "transparent";
@@ -12,7 +14,7 @@ const selectTab = (elementID) => {
 
 
 const getStaff = () => {
-    const fetchPromise1 = fetch("https://dividni.com/cors/CorsProxyService.svc/proxy?url="+encodeURI("https://unidirectory.auckland.ac.nz/rest/search?orgFilter=MATHS"),
+    const fetchPromise1 = fetch(proxy+encodeURI("https://unidirectory.auckland.ac.nz/rest/search?orgFilter=MATHS"),
         {
             headers: {
                 "Accept": "application/json",
@@ -37,10 +39,10 @@ const getStaff = () => {
                 StaffContents += "</p><p> Middle Name: " + staff.middlename
             }
             StaffContents += "</p><p>Last Name: " + staff.lastname + "</p><p>Job Title: " + staff.jobtitles + "</p>"
-            StaffContents += "</p><a href=\"mailto: " + staff.emailAddresses + "\">email: " + staff.emailAddresses + "</a><br>"
+            
 
             let v = await getVCard(staff.profileUrl[1]);
-
+            StaffContents += "</p><a href=\"mailto: " + staff.emailAddresses + "\">email: " + staff.emailAddresses + "</a><br>"
             StaffContents += v;
             if(v==null){
                 StaffContents += "<a href=\"https://unidirectory.auckland.ac.nz/people/vcard/" + staff.profileUrl[1] + "\"> Add to contacts</a><hr>"
@@ -54,19 +56,22 @@ const getStaff = () => {
 
 
 async function getVCard(Url) {
-    let output = "hello";
-    await fetch("https://dividni.com/cors/CorsProxyService.svc/proxy?url="+encodeURI("https://unidirectory.auckland.ac.nz/people/vcard/"+ Url) )
+    let output;
+    await fetch(proxy+encodeURI("https://unidirectory.auckland.ac.nz/people/vcard/"+ Url) )
     .then((response) => response.text())
     .then((data) => {
         let array = data.split("\n");
         let tel;
+        let adr;
         array.forEach(element => {
             if (element.substring(0, 3) == "TEL") {
                 tel = element.split(":")[1];
+            }else if(element.substring(0, 3) == "ADR"){
+                adr = element.split(":")[1].split(";").join("");
             }
         })
-        output = "<a href=\"tel:" + tel + "\">phone: " + tel
-        + "<br><a href=\"https://unidirectory.auckland.ac.nz/people/vcard/" + Url + "\"> Add to contacts</a><hr>";
+        output = "<a href=\"tel:" + tel + "\">phone: " + tel +"</a><br>"
+        + "<a href=\"https://unidirectory.auckland.ac.nz/people/vcard/" + Url + "\"> Add to contacts</a><hr>";
     });
     return output;
 }
