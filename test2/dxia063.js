@@ -29,13 +29,19 @@ const getCourses = () => {
             let CourseContents = "";
 
 
-            CourseContents += "<p>" + course.subject + " : " + course.catalogNbr + "</p>"
+            CourseContents += "<p>" + course.subject + "   " + course.catalogNbr + "</p>"
             CourseContents += "<p>" + course.title + "</p>"
-            CourseContents += "<p>" + course.description + "</p>"
+            if(course.description==null){
+                CourseContents += "<p>No Description Avaliable</p>" 
+            }else{
+                CourseContents += "<p>" + course.description + "</p>"
+            }
+            
             CourseContents += "<p>Points Offered: " + course.unitsAcadProg + "</p>"
             CourseContents += "<p>" + course.rqrmntDescr + "</p>"
 
-            CourseContents += "<button onclick=\"getMoreInfo(" + course.catalogNbr + ")\"> More Info </button><hr>"
+            CourseContents += '<button id="button'+course.catalogNbr+'" onclick=\"getMoreInfo(' + course.catalogNbr + ')\"> More Info </button>'
+            CourseContents += '<div id="moreInfo'+course.catalogNbr+'"class="content"> </div><hr>'
             document.getElementById("CoursesContent").innerHTML += CourseContents;
         })
 
@@ -44,26 +50,35 @@ const getCourses = () => {
 
 
 async function getMoreInfo(Id) {
-    let output;
+
+    document.getElementById("button"+Id).disabled=true;
+
     await fetch("https://api.test.auckland.ac.nz/service/classes/v1/classes?year=2020&subject=MATHS&size=500&catalogNbr=" + Id)
         .then((response) => response.json())
         .then((res) => {
-            let timetable;
+            let timetable = "";
             res.data.forEach((data) => {
 
                 timetable += "<p>" + data.classNbr + "  " + data.classSection + "   " + data.component + "</p>";
+                let count=0;
                 data.meetingPatterns.forEach((meetings) => {
-                    timetable += "<p>" + meetings.daysOfWeek + "  " + meetings.startTime + "   " + meetings.endTime + "</p>";
-                    timetable += "<p>" + meetings.location + "</p>";
+                    timetable += "<p>" + meetings.daysOfWeek + "  " + meetings.startTime + "  to  " + meetings.endTime + "  at  " + meetings.location + "</p>";
+                    count++;
                 })
+
+                if(count==0){
+                    timetable += "No schedule avaliable"
+                }
                 timetable += "<hr>"
             })
-
-            alert(timetable);
+            if(timetable==""){
+                timetable+= "No Info Avaliable"
+            }
+            document.getElementById("moreInfo"+Id).innerHTML = timetable;
+            document.getElementById("moreInfo"+Id).style.display = "none";
+            document.getElementById("moreInfo"+Id).style.display = "block";
         })
-    return output;
 }
-
 
 const logo =
     '<path stroke-linecap="round" d="M 55.8 283.25 A 166.6 166.6 0 1 1 344.19 283.25" stroke-width="40" stroke="black" fill="none"/>\n'
@@ -86,17 +101,20 @@ const getInfo = () => {
     const streamPromise1 = fetchPromise1.then((response) => response.json());
 
     streamPromise1.then((data) => {
-        let containerSize = 400;
-        let svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + containerSize + " " + containerSize + "\">\n";
-        let dayCount=0;
-        let x = 10;
-        let y = 10;
+        let containerSize = 200;
+        let svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + containerSize + " " + containerSize/2 + "\">\n";
+        let dayCount=1;
+        let x = 20;
+        let y = 0;
 
         svg += "<symbol id=\"myLogo\" width=\"10\" height=\"10\" viewBox=\"0 0 400 334\">\n"
         svg += logo
         svg += '</symbol>\n'
 
         data.forEach((day) => {
+
+            svg += '<text x="0" y="'+(y+10)+'">'+dayCount+'</text>'
+
             let num = 0;
             for(let i = 0; i<day; i++){ 
                 num++;
@@ -108,7 +126,6 @@ const getInfo = () => {
             }
 
             if (num != 0) {
-                console.log(num);
                 svg +='<clipPath id="cutout'+dayCount+'">'
                     + '<rect x="' + x + '" y="' + y + '" width="' + num + '" height="10" fill="white" stroke="black"/>'
                     + '</clipPath>';
@@ -117,11 +134,14 @@ const getInfo = () => {
                 svg += '<use xlink:href=\"#myLogo\" x=\"' + x + '\"  y=\"' + y + '\"/>\n'
                 svg += '</g>\n'
             }
-            y += 10;
-            x=10;
+            y += 15;
+            x=20;
             dayCount++;
+            console.log(day);
         })
         svg += "</svg>"
+        svg +='<hr><p>DATA: </p><p>'+ data +'</p>';
+
         document.getElementById("InfoContent").innerHTML += svg;
     });
 
