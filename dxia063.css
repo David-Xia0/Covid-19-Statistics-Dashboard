@@ -1,0 +1,84 @@
+body, html, p * {
+    font-size: 16px;
+    color: #000000;
+    font-weight: lighter;
+    background-color: lightcyan;
+}
+
+.graph {
+    padding: 5%;
+    margin: 5%;
+    border-radius: 10px;
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.graphContainer {
+    width: 80%;
+    text-align: center;
+    margin-top: 1%;
+}
+
+.pageLayout{
+    display: flex;
+    text-align: center;
+    align-content: center;
+}
+
+
+.statisticsContainer{
+    width: 19%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    justify-self: center;
+}
+
+.statHeading{
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.statValue{
+    font-size: 18px;
+    font-weight: lighter;
+}
+
+.tab{
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+.titleImage{
+    width: 100px;
+}
+
+@media screen and (max-width:990px) {
+    .pageLayout { 
+        flex-wrap: wrap;
+        display: block;  
+        text-align: center;
+        align-content: center;
+    }
+    .item:first-child { flex-basis: 100%; }
+
+    .graphContainer {
+        width: 100%;
+        text-align: center;
+        margin-top: 1%;
+        margin-bottom: 2%;
+    }
+    .statisticsContainer{
+        width: 100%;
+        padding: 2%;
+        border-radius: 10px;
+        background-color: white;
+        text-align: center;
+        justify-self: center;
+    }
+    
+  }
