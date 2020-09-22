@@ -1,0 +1,65 @@
+body, html, p * {
+    font-size: 16px;
+    color: #000000;
+}
+
+.content {
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+
+.commentbox {
+    height: 200px;
+    width: 50vw;
+    margin-bottom: 20px;
+}
+
+.commentcontainer {
+    margin-bottom: 40px;
+    background-color: grey;
+    border-radius: 10px;
+    text-align: center;
+    width: 55vw;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 20%;
+    justify-self: center;
+}
+
+.tab {
+    text-align: center;
+    font-size: 6vw;
+    width: 15%;
+}
+
+.mapImage {
+    width: 100%;
+}
+
+
+.status {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 25%;
+    top: 20%;
+    width: 50%;
+    overflow: auto;
+    word-wrap: auto;
+
+    background-color: #a0a0a0;
+    border: 1px solid #888;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 1%;
+}
+
+.productImg {
+    width: 350px;
+}
+
+.productSearch {
+    width: 50%;
+    height: 20px;
+}

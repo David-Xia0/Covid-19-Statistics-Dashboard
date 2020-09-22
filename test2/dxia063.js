@@ -1,5 +1,3 @@
-const proxy = "https://cws.auckland.ac.nz/cors/CorsProxyService.svc/proxy?url="
-
 const selectTab = (elementID) => {
     for (element of document.getElementsByClassName('tab')) {
         element.style.backgroundColor = "transparent";
@@ -31,17 +29,19 @@ const getCourses = () => {
 
             CourseContents += "<p>" + course.subject + "   " + course.catalogNbr + "</p>"
             CourseContents += "<p>" + course.title + "</p>"
-            if(course.description==null){
-                CourseContents += "<p>No Description Avaliable</p>" 
-            }else{
+            if (course.description == null) {
+                CourseContents += "<p>No Description Avaliable</p>"
+            } else {
                 CourseContents += "<p>" + course.description + "</p>"
             }
-            
-            CourseContents += "<p>Points Offered: " + course.unitsAcadProg + "</p>"
-            CourseContents += "<p>" + course.rqrmntDescr + "</p>"
 
-            CourseContents += '<button id="button'+course.catalogNbr+'" onclick=\"getMoreInfo(' + course.catalogNbr + ')\"> More Info </button>'
-            CourseContents += '<div id="moreInfo'+course.catalogNbr+'"class="content"> </div><hr>'
+            CourseContents += "<p>Points Offered: " + course.unitsAcadProg + "</p>"
+            if (course.rqrmntDescr != null) {
+                CourseContents += "<p>" + course.rqrmntDescr + "</p>"
+            }
+
+            CourseContents += '<button id="button' + course.catalogNbr + "\" onclick=\'getMoreInfo(\"" + course.catalogNbr + "\")\'> More Info </button>"
+            CourseContents += '<div id="moreInfo' + course.catalogNbr + '"class="content"> </div><hr>'
             document.getElementById("CoursesContent").innerHTML += CourseContents;
         })
 
@@ -51,32 +51,41 @@ const getCourses = () => {
 
 async function getMoreInfo(Id) {
 
-    document.getElementById("button"+Id).disabled=true;
+    if (document.getElementById("button" + Id).innerText == "Less Info") {
+        document.getElementById("moreInfo" + Id).style.display = "none";
+        document.getElementById("button" + Id).innerText = "More Info";
+        return;
+    }
 
+
+    document.getElementById("button" + Id).innerText = "Less Info";
     await fetch("https://api.test.auckland.ac.nz/service/classes/v1/classes?year=2020&subject=MATHS&size=500&catalogNbr=" + Id)
         .then((response) => response.json())
         .then((res) => {
-            let timetable = "";
+            let timetable = "<hr>";
             res.data.forEach((data) => {
 
-                timetable += "<p>" + data.classNbr + "  " + data.classSection + "   " + data.component + "</p>";
-                let count=0;
+
+console.log(data)
+                timetable += "<pre>Class Number:" + data.classNbr + "    Class Section: " + data.classSection + "    Component: " + data.component +"    Campus: " + data.campus +"</pre>";
+                let count = 0;
                 data.meetingPatterns.forEach((meetings) => {
-                    timetable += "<p>" + meetings.daysOfWeek + "  " + meetings.startTime + "  to  " + meetings.endTime + "  at  " + meetings.location + "</p>";
-                    count++;
+                    if (meetings.daysOfWeek != null && meetings.location != null && meetings.startTime != null) {
+                        timetable += "<p>" + meetings.daysOfWeek + "  " + meetings.startTime + "  to  " + meetings.endTime + "  at  " + meetings.location + "</p>";
+                        count++;
+                    }
                 })
 
-                if(count==0){
+                if (count == 0) {
                     timetable += "No schedule avaliable"
                 }
                 timetable += "<hr>"
             })
-            if(timetable==""){
-                timetable+= "No Info Avaliable"
+            if (timetable == "<hr>") {
+                timetable += "No Info Avaliable"
             }
-            document.getElementById("moreInfo"+Id).innerHTML = timetable;
-            document.getElementById("moreInfo"+Id).style.display = "none";
-            document.getElementById("moreInfo"+Id).style.display = "block";
+            document.getElementById("moreInfo" + Id).innerHTML = timetable;
+            document.getElementById("moreInfo" + Id).style.display = "block";
         })
 }
 
@@ -102,8 +111,8 @@ const getInfo = () => {
 
     streamPromise1.then((data) => {
         let containerSize = 200;
-        let svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + containerSize + " " + containerSize/2 + "\">\n";
-        let dayCount=1;
+        let svg = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 " + containerSize + " " + containerSize / 2 + "\">\n";
+        let dayCount = 1;
         let x = 20;
         let y = 0;
 
@@ -113,39 +122,36 @@ const getInfo = () => {
 
         data.forEach((day) => {
 
-            svg += '<text x="0" y="'+(y+10)+'">'+dayCount+'</text>'
+            svg += '<text x="0" y="' + (y + 10) + '">' + dayCount + '</text>'
 
             let num = 0;
-            for(let i = 0; i<day; i++){ 
+            for (let i = 0; i < day; i++) {
                 num++;
                 if (num == 10) {
                     svg += '<use xlink:href=\"#myLogo\" x=\"' + x + '\"  y=\"' + y + '\"/>\n'
-                    x+=10;
+                    x += 10;
                     num = 0
                 }
             }
 
             if (num != 0) {
-                svg +='<clipPath id="cutout'+dayCount+'">'
+                svg += '<clipPath id="cutout' + dayCount + '">'
                     + '<rect x="' + x + '" y="' + y + '" width="' + num + '" height="10" fill="white" stroke="black"/>'
                     + '</clipPath>';
 
-                svg += '<g clip-path="url(#cutout'+dayCount+')">\n'
+                svg += '<g clip-path="url(#cutout' + dayCount + ')">\n'
                 svg += '<use xlink:href=\"#myLogo\" x=\"' + x + '\"  y=\"' + y + '\"/>\n'
                 svg += '</g>\n'
             }
             y += 15;
-            x=20;
+            x = 20;
             dayCount++;
-            console.log(day);
         })
         svg += "</svg>"
-        svg +='<hr><p>DATA: </p><p>'+ data +'</p>';
+        svg += '<hr><p>DATA: </p><p>' + data + '</p>';
 
         document.getElementById("InfoContent").innerHTML += svg;
     });
-
-
 }
 
 

